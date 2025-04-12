@@ -1,0 +1,86 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Project</title>#}
+{#</head>#}
+{#<body>#}
+{##}
+{##}
+{# <table class=".table-striped">#}
+{#        <thead>#}
+{#            <tr>#}
+{#                <th scope="col">Bill_No</th>#}
+{#                <th scope="col">Amount</th>#}
+{#                <th scope="col">Type</th>#}
+{#                 <th scope="col">Product </th>#}
+{#                <th scope="col">Customer </th>#}
+{#            </tr>#}
+{##}
+{# {% for n in Product_Bill_List %}#}
+{##}
+{#           <tr>#}
+{#               <td>#}
+{#                  {{ n.bill_no}}#}
+{#               </td>#}
+{#                <td>#}
+{#                  {{ n.amount}}#}
+{#                </td>#}
+{#                <td>#}
+{#                  {{ n.type }}#}
+{#                </td>#}
+{#                <td>#}
+{#                  {{ n.p_id }}#}
+{#                </td>#}
+{#                <td>#}
+{#                  {{ n.c_id }}#}
+{#                </td>#}
+{##}
+{#           </tr>#}
+{##}
+{#    {% endfor %}#}
+{##}
+{#</table>#}
+{##}
+{#</body>#}
+{#</html>#}
+{##}
+
+{% extends 'base.html' %}
+
+{% block content %}
+     <table class=".table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Bill_No  </th>
+                <th scope="col">Amount  </th>
+                <th scope="col">Type  </th>
+                 <th scope="col">Product Name </th>
+                <th scope="col">Customer Name  </th>
+            </tr>
+
+ {% for n in Product_Bill_List %}
+
+           <tr>
+               <td>
+                  {{ n.bill_no}}
+               </td>
+                <td>
+                  {{ n.amount}}
+                </td>
+                <td>
+                  {{ n.type }}
+                </td>
+                <td>
+                  {{ n.p_id }}
+                </td>
+                <td>
+                  {{ n.c_id }}
+                </td>
+
+           </tr>
+
+    {% endfor %}
+
+</table>
+{% endblock content %}
