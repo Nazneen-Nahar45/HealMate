@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+      <div class="card-columns">
+
+      {% for p in all_product %}
+          <div class="card">
+            <img class="card-img-top" src="{{ p.image.url }}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">
+                <h5> {{ p.Product_name }}<br></h5>
+                  {{ p.Catagory}} <br>
+                  {{ p.cost }} <br>
+{#                  { #http://127.0.0.1:8000/Addproduct #}
+                  <a href="{{ p.id }}">
+                     {# http://127.0.0.1:8000/Addproduct/product_id #}
+                      <button type="button" class="btn btn-outline-primary">Details</button></a>
+              </p>
+                <a href="http://127.0.0.1:8000/order_product" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Order</a>
+            </div>
+          </div>
+
+      {% endfor %}
+      </div>
+{% endblock content %}
