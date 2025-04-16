@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p><h3>Our Services</h3></p>
+    <dev class="card-deck">
+        {% for s in serv %}
+
+            <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title"> {{ s.service_name }}</h5>
+                <p class="card-text">
+                    {{ s.service_for }}<br>
+                    {{ s.service_cost }}
+
+                </p>
+
+              </div>
+
+            </div>
+        {% endfor %}
+    </dev>
+    <a class="btn btn-primary" href="{% url 's_order' %}" role="button">Appoint Now!</a>
+
+{% endblock content %}
