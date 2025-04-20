@@ -1,0 +1,27 @@
+body {
+    background-color: white;
+    font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+    color: black;
+    margin: 0;
+    padding: 0;
+}
+
+section.hero-wrap.js-fullheight {
+    background-image: url("img.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /* Full height */
+    width: 100%;
+}
+
+h1, h2, h3, h4, h5 {
+    font-weight: bold;
+    margin: 10px 0; /* Adjusted margin for better spacing */
+}
+
+a, a:hover, a:visited {
+    color: aliceblue;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out; /* Smooth transition effect */
+}
