@@ -11,7 +11,7 @@
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form | crispy }}
-        <input type="submit">
+        <a href="http://127.0.0.1:8000/show_confirm/" class="btn btn-primary">Confirm Appointment</a>
     </form>
     <h4><b>{{ message }}</b></h4>
 </p>
