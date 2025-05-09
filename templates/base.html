@@ -1,74 +1,711 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <title>HealMate</title>
-    <link rel="stylesheet" href="{% static 'Home/styles.css' %}">
-</head>
-<body>
+ <head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <title>HealMate | Your Health Companion</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   <!-- Bootstrap 5.3 CSS -->
+   <link
+     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+     rel="stylesheet"
+     integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+     crossorigin="anonymous"
+   />
 
-<nav class="navbar navbar-expand-lg navbar-light bg-info">
-    <a class="navbar-brand" href="{% url 'home' %}"><b>HealMate</b></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active"><a class="btn btn-info" href="{% url 'home' %}">Home</a></li>
-            <li class="nav-item active"><a class="btn btn-info" href="{% url 'product' %}">Medi Shop</a></li>
-            <li class="nav-item active"><a class="btn btn-info" href="{% url 'service' %}">Services</a></li>
-            <li class="nav-item active"><a class="btn btn-info" href="{% url 'about' %}">About us</a></li>
-            <li class="nav-item active"><a class="btn btn-info" href="{% url 'profile' %}">Edit Profile</a></li>
-            <li class="nav-item active">
-                {% if user.is_authenticated %}
-                    <form method="post" action="{% url 'logout' %}">
-                        {% csrf_token %}
-                        <button class="btn btn-danger" type="submit">Log Out</button>
-                    </form>
-                {% else %}
-                    <a class="btn btn-info" href="{% url 'login' %}">Log In</a>
-                {% endif %}
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'product' %}">
-            {% csrf_token %}
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search">
-            <button class="btn btn-outline-dark" type="submit">Search</button>
-        </form>
-    </div>
-</nav>
+   <style>
+     :root {
+       /* Primary palette */
+       --primary: #06b6d4;
+       --primary-dark: #0891b2;
+       --primary-light: #67e8f9;
+       --secondary: #8b5cf6;
 
-<div class="container text-center mt-4">
-    {% if user.is_authenticated %}
-        <h2>Welcome to HealMate</h2>
-        <h3>{{ user.username }}</h3>
-    {% else %}
-        <h4>Please Log In First 😄</h4>
-        <p>Don't have an account? <a class="btn btn-primary" href="{% url 'Cregi' %}">Sign Up</a> now!</p>
-    {% endif %}
-</div>
+       /* Neutral colors */
+       --white: #ffffff;
+       --light-gray: #f8fafc;
+       --medium-gray: #e2e8f0;
+       --dark-gray: #64748b;
+       --text-color: #1e293b;
 
-<div class='container'>
-    {% block content %}
-    {% endblock content %}
-</div>
+       /* Accent colors */
+       --success: #10b981;
+       --warning: #f59e0b;
+       --danger: #ef4444;
 
-<!-- Footer Section -->
-<footer class="bg-info text-white text-center py-3 mt-4">
-    <div class="container">
-        <h5><b>HealMate</b></h5>
-        <a href="http://127.0.0.1:8000/admin/" class="btn btn-light active" role="button" aria-pressed="true">Admin LogIn</a>
-        <p>Live Well and Healthy Life</p>
-        <p>&copy; 2025 HealMate. All rights reserved.</p>
-    </div>
-</footer>
+       /* UI colors */
+       --navbar-bg: var(--white);
+       --container-bg: #f1f5f9;
+       --card-bg: var(--white);
+       --accent-color: var(--primary);
+       --light-bg: #f0fbff;
+     }
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+     body {
+       background-color: var(--container-bg);
+       color: var(--text-color);
+       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+       line-height: 1.6;
+     }
 
-</body>
+     /* Typography */
+     h1, h2, h3, h4, h5, h6 {
+       font-weight: 600;
+       line-height: 1.3;
+     }
+
+     /* Navbar */
+     .navbar-custom {
+       background-color: var(--navbar-bg);
+       border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+       padding: 0.75rem 0;
+     }
+
+     .navbar-brand {
+       font-weight: 700;
+       font-size: 1.25rem;
+       color: var(--primary);
+     }
+
+     .navbar-custom .nav-link {
+       color: var(--text-color);
+       font-weight: 500;
+       padding: 0.5rem 1rem;
+       transition: all 0.2s ease;
+       border-radius: 8px;
+       margin: 0 0.25rem;
+     }
+
+     .navbar-custom .nav-link:hover {
+       color: var(--accent-color);
+       background-color: rgba(6, 182, 212, 0.05);
+     }
+
+     .navbar-custom .nav-link.active {
+       color: var(--accent-color);
+       background-color: rgba(6, 182, 212, 0.08);
+       font-weight: 600;
+     }
+
+     /* AI Button */
+     .ai-button {
+       display: inline-flex;
+       align-items: center;
+       justify-content: center;
+       gap: 8px;
+       background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+       color: white;
+       font-weight: 600;
+       padding: 0.5rem 1.25rem;
+       border-radius: 12px;
+       border: none;
+       cursor: pointer;
+       transition: all 0.3s ease;
+       box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
+     }
+
+     .ai-button:hover {
+       transform: translateY(-2px);
+       box-shadow: 0 6px 16px rgba(6, 182, 212, 0.3);
+     }
+
+     .ai-button:active {
+       transform: translateY(0);
+     }
+
+     .ai-button svg {
+       width: 18px;
+       height: 18px;
+     }
+
+     /* Toolbar */
+     .toolbar-container {
+       display: flex;
+       align-items: center;
+       justify-content: flex-end;
+       gap: 12px;
+     }
+
+     .toolbar-container .form-control {
+       max-width: 180px;
+       border-radius: 12px;
+       border: 1px solid var(--medium-gray);
+       padding: 0.5rem 1rem;
+       font-size: 0.875rem;
+       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+     }
+
+     .toolbar-container .form-control:focus {
+       border-color: var(--primary-light);
+       box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
+     }
+
+     .toolbar-container .btn {
+       border-radius: 12px;
+       padding: 0.5rem 1rem;
+       font-size: 0.875rem;
+       font-weight: 500;
+       transition: all 0.2s ease;
+     }
+
+     /* Hero */
+     .hero {
+       margin: 2.5rem 0;
+       padding: 3rem 0;
+       background-color: var(--white);
+       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+       border-radius: 24px;
+       overflow: hidden;
+       position: relative;
+     }
+
+     .hero::before {
+       content: '';
+       position: absolute;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 6px;
+       background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+     }
+
+     .hero .row {
+       min-height: 320px;
+     }
+
+     .hero .hero-text {
+       max-width: 520px;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       padding: 1.5rem;
+     }
+
+     .hero h1 {
+       background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+       background-clip: text;
+       color: transparent;
+       font-size: 2.75rem;
+       margin-bottom: 1rem;
+       font-weight: 700;
+       line-height: 1.2;
+     }
+
+     .hero p {
+       font-size: 1.1rem;
+       margin-bottom: 1.75rem;
+       color: var(--dark-gray);
+       line-height: 1.6;
+     }
+
+     .hero-image-container {
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       height: 100%;
+       padding: 1.5rem;
+     }
+
+     .hero-image-card {
+       background-color: var(--light-bg);
+       padding: 1.5rem;
+       border-radius: 24px;
+       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+       transition: transform 0.3s ease;
+       overflow: hidden;
+       position: relative;
+     }
+
+     .hero-image-card:hover {
+       transform: translateY(-5px);
+     }
+
+     .hero img {
+       max-width: 100%;
+       border-radius: 16px;
+       max-height: 280px;
+       object-fit: cover;
+     }
+
+     .btn {
+       border-radius: 12px;
+       padding: 0.625rem 1.5rem;
+       font-weight: 600;
+       transition: all 0.3s ease;
+     }
+
+     .btn-primary {
+       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+       border: none;
+       box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
+     }
+
+     .btn-primary:hover {
+       background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-dark) 100%);
+       transform: translateY(-2px);
+       box-shadow: 0 6px 16px rgba(6, 182, 212, 0.3);
+     }
+
+     .btn-outline-primary {
+       color: var(--primary);
+       border: 2px solid var(--primary);
+       background-color: transparent;
+     }
+
+     .btn-outline-primary:hover {
+       background-color: rgba(6, 182, 212, 0.08);
+       color: var(--primary-dark);
+       border-color: var(--primary-dark);
+       transform: translateY(-2px);
+     }
+
+     .hero-buttons {
+       display: flex;
+       gap: 12px;
+     }
+
+     /* Features */
+     .features {
+       margin: 4rem 0;
+       padding: 3.5rem 0;
+       background-color: var(--light-bg);
+       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+       border-radius: 24px;
+       position: relative;
+     }
+
+     .features .section-title {
+       text-align: center;
+       font-size: 2.25rem;
+       margin-bottom: 1.25rem;
+       background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+       background-clip: text;
+       color: transparent;
+       padding-top: 1rem;
+       font-weight: 700;
+     }
+
+     .features .section-divider {
+       width: 80px;
+       height: 4px;
+       background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+       margin: 0 auto 2.5rem;
+       border-radius: 4px;
+     }
+
+     .features .card {
+       border: none;
+       border-radius: 20px;
+       transition: all 0.3s ease;
+       min-height: 260px;
+       display: flex;
+       flex-direction: column;
+       background-color: var(--white);
+       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+       overflow: hidden;
+     }
+
+     .features .card:hover {
+       transform: translateY(-8px);
+       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+     }
+
+     .features .card::before {
+       content: '';
+       position: absolute;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 6px;
+       background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+       opacity: 0;
+       transition: opacity 0.3s ease;
+     }
+
+     .features .card:hover::before {
+       opacity: 1;
+     }
+
+     .features .card-title {
+       color: var(--primary);
+       font-weight: 700;
+       font-size: 1.375rem;
+       margin-bottom: 0.75rem;
+     }
+
+     .features .card-body {
+       display: flex;
+       flex-direction: column;
+       justify-content: space-between;
+       flex: 1;
+       padding: 2rem;
+     }
+
+     .features .card-text {
+       margin-bottom: 1.5rem;
+       color: var(--dark-gray);
+     }
+
+     .features .btn {
+       align-self: flex-start;
+       min-width: 140px;
+     }
+
+     /* Footer */
+     footer {
+       background-color: var(--white);
+       padding: 4rem 0 2rem;
+       border-top: 1px solid rgba(226, 232, 240, 0.6);
+       box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03);
+       margin-top: 4rem;
+     }
+
+     footer h5 {
+       background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+       background-clip: text;
+       color: transparent;
+       font-weight: 700;
+       font-size: 1.5rem;
+       margin-bottom: 0.5rem;
+     }
+
+     footer p {
+       color: var(--dark-gray);
+     }
+
+     footer .newsletter {
+       max-width: 400px;
+       margin: 2rem auto 1.75rem;
+     }
+
+     footer .newsletter .form-control {
+       border-radius: 12px;
+       padding: 0.75rem 1.25rem;
+       border: 1px solid var(--medium-gray);
+       background-color: var(--light-gray);
+       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+     }
+
+     footer .newsletter .btn {
+       border-radius: 12px;
+       padding: 0.75rem 1.5rem;
+       margin-top: 0.75rem;
+       width: 100%;
+     }
+
+     footer .page-links {
+       margin-bottom: 1.75rem;
+     }
+
+     footer .page-links a {
+       color: var(--dark-gray);
+       transition: color 0.2s ease;
+       font-weight: 500;
+       padding: 0 0.75rem;
+     }
+
+     footer .page-links a:hover {
+       color: var(--primary);
+     }
+
+     footer .admin-link {
+       margin-top: 1.5rem;
+     }
+
+     footer .admin-link .btn {
+       background-color: var(--light-gray);
+       color: var(--dark-gray);
+       border: 1px solid var(--medium-gray);
+       padding: 0.5rem 1.25rem;
+       font-size: 0.875rem;
+       border-radius: 12px;
+       transition: all 0.2s ease;
+     }
+
+     footer .admin-link .btn:hover {
+       background-color: var(--medium-gray);
+       color: var(--text-color);
+       transform: translateY(-2px);
+     }
+
+     footer .small {
+       font-size: 0.875rem;
+       color: var(--dark-gray);
+     }
+
+     /* Hide doctor image from block content */
+     .main-content img[src*="doctor"] {
+       display: none;
+     }
+
+     /* Optional: Hide all images in main content if needed */
+     .main-content > img {
+       display: none;
+     }
+
+     /* Responsive adjustments */
+     @media (max-width: 991.98px) {
+       .toolbar-container {
+         margin-top: 1rem;
+         justify-content: flex-start;
+       }
+
+       .hero {
+         padding: 2rem 0;
+       }
+
+       .hero h1 {
+         font-size: 2.25rem;
+       }
+
+       .hero p {
+         font-size: 1rem;
+       }
+
+       .features .card {
+         margin-bottom: 1.5rem;
+       }
+     }
+
+     @media (max-width: 767.98px) {
+       .hero .row {
+         min-height: auto;
+       }
+
+       .hero-text {
+         text-align: center;
+         padding: 2rem 1rem;
+       }
+
+       .hero-image-container {
+         padding: 1rem;
+       }
+
+       .hero-buttons {
+         display: flex;
+         justify-content: center;
+         flex-wrap: wrap;
+         gap: 0.5rem;
+       }
+
+       .features {
+         padding: 2.5rem 0;
+       }
+
+       .features .section-title {
+         font-size: 1.75rem;
+       }
+     }
+   </style>
+ </head>
+
+ <body>
+   <!-- Navbar -->
+   <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+     <div class="container">
+       <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+         <img src="{{ MEDIA_URL }}products/images/img.png"
+              alt="HealMate Logo" width="36" height="36"
+              class="me-2 rounded-circle">
+         <span>HealMate</span>
+       </a>
+       <button class="navbar-toggler" type="button"
+               data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+               aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+       </button>
+
+       <div class="collapse navbar-collapse" id="mainNavbar">
+         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+           <li class="nav-item">
+             <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+                href="{% url 'home' %}">Home</a>
+           </li>
+           <li class="nav-item">
+             <a class="nav-link {% if request.resolver_match.url_name == 'product' %}active{% endif %}"
+                href="{% url 'product' %}">MediShop</a>
+           </li>
+           <li class="nav-item">
+             <a class="nav-link {% if request.resolver_match.url_name == 'service' %}active{% endif %}"
+                href="{% url 'service' %}">Services</a>
+           </li>
+           <li class="nav-item">
+             <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+                href="{% url 'about' %}">About</a>
+           </li>
+           <li class="nav-item">
+             <button class="ai-button ms-2"
+                     onclick="location.href='http://127.0.0.1:5000';"
+                     title="AI Health Assistant">
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                 <path d="M12 8V4H8"></path>
+                 <rect x="2" y="2" width="20" height="8" rx="2"></rect>
+                 <path d="M2 14h20"></path>
+                 <path d="M2 20h20"></path>
+                 <path d="M6 14v6"></path>
+                 <path d="M18 14v6"></path>
+                 <path d="M12 14v6"></path>
+               </svg>
+               AI
+             </button>
+           </li>
+         </ul>
+
+         <!-- Combined toolbar -->
+         <div class="toolbar-container">
+           <form class="d-flex" method="POST" action="{% url 'product' %}">
+             {% csrf_token %}
+             <div class="input-group">
+               <input class="form-control" type="search" name="search" placeholder="Search..." aria-label="Search" />
+               <button class="btn btn-outline-primary" type="submit">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                 </svg>
+               </button>
+             </div>
+           </form>
+
+           {% if user.is_authenticated %}
+             <div class="d-flex align-items-center ms-2">
+               <a class="nav-link me-2" href="{% url 'profile' %}">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-circle me-1" viewBox="0 0 16 16">
+                   <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                   <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                 </svg>
+                 Profile
+               </a>
+               <form method="post" action="{% url 'logout' %}" class="d-inline">
+                 {% csrf_token %}
+                 <button class="btn btn-outline-primary btn-sm" type="submit">Log Out</button>
+               </form>
+             </div>
+           {% else %}
+             <a class="btn btn-outline-primary btn-sm ms-2" href="{% url 'login' %}">Log In</a>
+           {% endif %}
+         </div>
+       </div>
+     </div>
+   </nav>
+
+   {# Only show on homepage #}
+   {% if request.resolver_match.url_name == 'home' %}
+     <!-- Hero -->
+     <div class="container">
+       <div class="hero">
+         <div class="row align-items-center">
+           <div class="col-md-6 hero-text">
+             {% if user.is_authenticated %}
+               <h1>Welcome Back, {{ user.username }}!</h1>
+               <p>Take control of your health with our AI-powered tools: Predict diseases, chat with our assistant, and get personalized advice.</p>
+             {% else %}
+               <h1>Join HealMate</h1>
+               <p>Your personal companion for wellness: Predict diseases, chat with an AI assistant, explore services, and shop trusted meds.</p>
+               <div class="hero-buttons">
+                 <a href="{% url 'login' %}" class="btn btn-primary me-2">Log In</a>
+                 <a href="{% url 'Cregi' %}" class="btn btn-outline-primary">Sign Up</a>
+               </div>
+             {% endif %}
+           </div>
+           <div class="col-md-6 hero-image-container">
+             <div class="hero-image-card">
+               <img
+                 src="{{ MEDIA_URL }}products/images/stethoscope.jpg"
+                 alt="HealMate Spotlight"
+                 class="img-fluid rounded shadow-sm"
+               />
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+     <!-- Features -->
+     <div class="container">
+       <div class="features">
+         <h2 class="section-title">Our Core Features</h2>
+         <div class="section-divider"></div>
+         <div class="row g-4">
+           <div class="col-md-4">
+             <div class="card h-100">
+               <div class="card-body">
+                 <h5 class="card-title">Predict Disease</h5>
+                 <p class="card-text">Enter your symptoms and let our AI model suggest possible conditions with high accuracy.</p>
+                 <a href="#" class="btn btn-primary mt-auto">Get Started</a>
+               </div>
+             </div>
+           </div>
+           <div class="col-md-4">
+             <div class="card h-100">
+               <div class="card-body">
+                 <h5 class="card-title">Chatbot</h5>
+                 <p class="card-text">Instantly get answers to health questions from our virtual assistant trained on medical knowledge.</p>
+                 <a href="/chatbot" class="btn btn-primary mt-auto">Chat Now</a>
+               </div>
+             </div>
+           </div>
+           <div class="col-md-4">
+             <div class="card h-100">
+               <div class="card-body">
+                 <h5 class="card-title">Medi Shop & Services</h5>
+                 <p class="card-text">Browse medicines, book appointments, and access wellness services all in one place.</p>
+                 <a href="{% url 'product' %}" class="btn btn-primary mt-auto">Explore</a>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   {% endif %}
+
+   <!-- Main Content Block -->
+   <div class="container main-content py-4">
+     {% block content %}
+     {% endblock %}
+   </div>
+
+   <!-- Footer -->
+   <footer class="text-center text-dark">
+     <div class="container">
+       <h5>HealMate</h5>
+       <p>Your wellness, our mission.</p>
+
+       <div class="newsletter">
+         <div class="mb-3">
+           <input type="email" class="form-control" placeholder="Subscribe for updates" aria-label="Email address" />
+         </div>
+         <button class="btn btn-primary">Subscribe</button>
+       </div>
+
+       <div class="page-links d-flex justify-content-center flex-wrap">
+         <a href="{% url 'home' %}" class="text-decoration-none">Home</a>
+         <a href="{% url 'about' %}" class="text-decoration-none">About</a>
+         <a href="{% url 'service' %}" class="text-decoration-none">Services</a>
+         <a href="{% url 'product' %}" class="text-decoration-none">Shop</a>
+       </div>
+
+       <div class="admin-link">
+         <a href="{% url 'admin:index' %}" class="btn btn-sm">Admin Log In</a>
+       </div>
+
+       <p class="small mt-3">&copy; 2025 HealMate. All rights reserved.</p>
+     </div>
+   </footer>
+
+   <!-- Bootstrap JS -->
+   <script
+     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+     crossorigin="anonymous"
+   ></script>
+ </body>
 </html>
