@@ -1,24 +1,203 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p><h3>Our Services</h3></p>
-    <dev class="card-deck">
-        {% for s in serv %}
+<div class="services-container">
+  <div class="services-header">
+    <h2 class="services-title">Our Services</h2>
+    <div class="services-divider"></div>
+    <p class="services-subtitle">Professional healthcare services tailored to your needs</p>
+  </div>
 
-            <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title"> {{ s.service_name }}</h5>
-                <p class="card-text">
-                    {{ s.service_for }}<br>
-                    {{ s.service_cost }}
+  <div class="services-grid">
+    {% for s in serv %}
+      <div class="service-card">
+        <div class="service-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+          </svg>
+        </div>
+        <div class="service-content">
+          <h3 class="service-title">{{ s.service_name }}</h3>
+          <p class="service-description">{{ s.service_for }}</p>
+          <div class="service-price">{{ s.service_cost }}</div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 
-                </p>
+  <div class="appointment-section">
+    <p class="appointment-text">Ready to prioritize your health? Schedule an appointment today!</p>
+    <a class="appointment-button" href="{% url 's_order' %}">
+      <span>Appoint Now</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+      </svg>
+    </a>
+  </div>
+</div>
 
-              </div>
+<style>
+  /* Services Section Styling */
+  .services-container {
+    padding: 3rem 0;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 
-            </div>
-        {% endfor %}
-    </dev>
-    <a class="btn btn-primary" href="{% url 's_order' %}" role="button">Appoint Now!</a>
+  .services-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
 
+  .services-title {
+    color: var(--primary, #0891b2);
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .services-divider {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary, #0891b2) 0%, var(--secondary, #6366f1) 100%);
+    margin: 0 auto 1.5rem;
+    border-radius: 2px;
+  }
+
+  .services-subtitle {
+    color: var(--dark-gray, #64748b);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .service-card {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e6f7ff 100%);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(8, 145, 178, 0.07);
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    border-left: 4px solid var(--primary, #0891b2);
+  }
+
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(8, 145, 178, 0.12);
+  }
+
+  .service-icon {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(8, 145, 178, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary, #0891b2);
+  }
+
+  .service-content {
+    flex: 1;
+  }
+
+  .service-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color, #1e293b);
+    margin-bottom: 1rem;
+  }
+
+  .service-description {
+    color: var(--dark-gray, #64748b);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .service-price {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--primary, #0891b2);
+    padding: 0.5rem 0;
+    border-top: 1px solid rgba(8, 145, 178, 0.1);
+  }
+
+  .appointment-section {
+    background: linear-gradient(135deg, var(--primary, #0891b2) 0%, var(--secondary, #6366f1) 100%);
+    border-radius: 16px;
+    padding: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    box-shadow: 0 10px 30px rgba(8, 145, 178, 0.15);
+  }
+
+  .appointment-text {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 0;
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .appointment-button {
+    background-color: white;
+    color: var(--primary, #0891b2);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .appointment-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    color: var(--primary-dark, #0e7490);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .services-container {
+      padding: 2rem 1rem;
+    }
+
+    .services-title {
+      font-size: 1.75rem;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .appointment-section {
+      padding: 2rem;
+      text-align: center;
+      flex-direction: column;
+    }
+
+    .appointment-text {
+      margin-bottom: 1rem;
+    }
+  }
+</style>
 {% endblock content %}
