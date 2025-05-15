@@ -151,6 +151,11 @@
 
 ---
 
+<h2 align="left">📊 Diagrams:</h2>
+
+* **Entity‑Relationship Diagram (ERD)**  
+  ![ERD](https://github.com/NishatTasnim01/Media-Vault/blob/main/ER%20Diagram%20SVG.svg)
+
 <h2 align="left">🌍 Social Impact:</h2>
 
 * Helps users take control of their health anytime, anywhere
@@ -160,15 +165,9 @@
 
 ---
 
-<h2 align="left">📆 Project Timeline (Gantt Overview):</h2>
+<h2 align="left">📆 Project Timeline (Gantt Chart):</h2>
 
-* **Week 1–2:** Initialization, Research, Requirement Gathering
-* **Week 3–4:** System Design (ERD, DFD)
-* **Week 5–6:** Frontend UI & UX
-* **Week 7–8:** Backend API & Database
-* **Week 9:** Machine Learning Integration
-* **Week 10:** Testing & Debugging
-* **Week 11–12:** Final Deployment & Launch
+ ![Gantt](https://github.com/NishatTasnim01/Media-Vault/blob/main/Gantt%20Chart.png)
 
 ---
 
