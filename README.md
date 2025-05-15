@@ -36,14 +36,14 @@
 <h2 align="left">⚙️ Run This Project:</h2>
 
 1. **Install Required Tools:**
-   * Python 3.x
+   * Python 3.12
    * VS Code or any Python IDE
    * Git
-   * Install required Python libraries from `requirements.txt` (if available)
 
 2. **Clone This Repository:**
    ```sh
    git clone https://github.com/Nazneen-Nahar45/HealMate
+
 
 3. **Navigate to Project Directory:**
 
@@ -51,13 +51,32 @@
    cd HealMate
    ```
 
-4. **Run the Django Server:**
+4. **Create a Virtual Environment (Optional but Recommended):**
+
+   ```sh
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+5. **Install Required Python Libraries:**
+
+   ```sh
+   pip install django
+   pip install flask
+   pip install pandas
+   pip install numpy
+   pip install scikit-learn
+   pip install Pillow
+   pip install django-crispy-forms crispy-bootstrap4
+   ```
+
+6. **Run the Django Server:**
 
    ```sh
    python manage.py runserver
    ```
 
-5. **Open in Browser:**
+7. **Open in Browser:**
 
    ```
    http://127.0.0.1:8000/
@@ -137,7 +156,4 @@
 
 > 🚀 HealMate – Revolutionizing Healthcare, One Click at a Time.
 
-```
-
-Let me know if you'd like help creating a `requirements.txt` file or linking live project/demo URLs.
 ```
