@@ -1,4 +1,4 @@
-<h1 align="center" style="color: green;">HealMate <img src="https://media.giphy.com/media/13EcNB67NDSihK/giphy.gif" width="80" height="40" ></h1>
+<h1 align="center" style="color: green;">HealMate </h1>
 
 **HealMate** is an AI-powered medical assistant platform designed to help users identify diseases from symptoms (via text or voice), receive personalized health recommendations, purchase medicines during emergencies, and book health services or appointments. It integrates machine learning models and chatbot technology to deliver a smart, accessible, and life-saving healthcare experience. 🏥💊🤖
 
@@ -87,22 +87,24 @@
 <h2 align="left">📸 Screenshots:</h2>
 
 * **Home Page**
-  ![Homepage](https://github.com/Nazneen-Nahar45/HealMate/assets/homepage.png)
+  ![Homepage](https://github.com/NishatTasnim01/Media-Vault/blob/main/Home.png)
 
 * **Buy Medicine Page**
-  ![Buy Medicine](https://github.com/Nazneen-Nahar45/HealMate/assets/buymedicine.png)
+  ![Buy Medicine](https://github.com/NishatTasnim01/Media-Vault/blob/main/add.png)
 
 * **Services Page**
-  ![Services](https://github.com/Nazneen-Nahar45/HealMate/assets/services.png)
+  ![Services](https://github.com/NishatTasnim01/Media-Vault/blob/main/services.png)
 
 * **About Us Page**
-  ![About Us](https://github.com/Nazneen-Nahar45/HealMate/assets/aboutus.png)
+  ![About Us](https://github.com/NishatTasnim01/Media-Vault/blob/main/about.png)
+  ![About Us1](https://github.com/NishatTasnim01/Media-Vault/blob/main/about1.png)
+  ![About Us2](https://github.com/NishatTasnim01/Media-Vault/blob/main/about2.png)
 
 * **Predict Disease**
-  ![Predict Disease](https://github.com/Nazneen-Nahar45/HealMate/assets/predictdisease.png)
+  ![Predict Disease](https://github.com/NishatTasnim01/Media-Vault/blob/main/prediction.png)
 
 * **AI Chatbot**
-  ![AI Chatbot](https://github.com/Nazneen-Nahar45/HealMate/assets/chatbot.png)
+  ![AI Chatbot](https://github.com/NishatTasnim01/Media-Vault/blob/main/chatbot.png)
 
 ---
 
