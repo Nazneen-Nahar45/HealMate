@@ -1,4 +1,4 @@
-<h1 align="center" style="color: green;">HealMate <img src="https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif" width="80" height="40" ></h1>
+<h1 align="center" style="color: green;">HealMate <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXk3cWZ4YWxka3Bhb2xucTcycHhtdGRsNmhuZnY0eHRtbnp4amR4dyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l1J9EdzfOSgfyueLm/giphy.gif" width="80" height="40" ></h1>
 
 **HealMate** is an AI-powered medical assistant platform designed to help users identify diseases from symptoms (via text or voice), receive personalized health recommendations, purchase medicines during emergencies, and book health services or appointments. It integrates machine learning models and chatbot technology to deliver a smart, accessible, and life-saving healthcare experience. 🏥💊🤖
 
