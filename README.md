@@ -70,13 +70,40 @@
    pip install django-crispy-forms crispy-bootstrap4
    ```
 
-6. **Run the Django Server:**
+6. **Install Google Generative AI & Env Management:**
+   To interact with Google’s Generative AI and manage your API keys, run:
+
+   ```bash
+   pip install google-generativeai python-dotenv Pillow
+   # or, for the newer SDK:
+   pip install google-genai
+   ```
+
+   Then create a `.env` file in your project root and add:
+
+   ```text
+   GOOGLE_API_KEY=your_google_api_key_here
+   ```
+
+   In your Python code, load it with `python-dotenv`:
+
+   ```python
+   import os
+   from dotenv import load_dotenv
+
+   load_dotenv()
+   api_key = os.getenv("GOOGLE_API_KEY")
+   ```
+
+   This keeps your API keys secure and out of your codebase.
+   
+7. **Run the Django Server:**
 
    ```sh
    python manage.py runserver
    ```
 
-7. **Open in Browser:**
+8. **Open in Browser:**
 
    ```
    http://127.0.0.1:8000/
