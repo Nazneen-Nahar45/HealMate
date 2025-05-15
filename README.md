@@ -1,5 +1,3 @@
-
-````markdown
 <h1 align="center" style="color: green;">HealMate <img src="https://media.giphy.com/media/l4FGuhL4U2WyjdkaY/giphy.gif" width="80" height="40" ></h1>
 
 **HealMate** is an AI-powered medical assistant platform designed to help users identify diseases from symptoms (via text or voice), receive personalized health recommendations, purchase medicines during emergencies, and book health services or appointments. It integrates machine learning models and chatbot technology to deliver a smart, accessible, and life-saving healthcare experience. 🏥💊🤖
@@ -46,7 +44,6 @@
 2. **Clone This Repository:**
    ```sh
    git clone https://github.com/Nazneen-Nahar45/HealMate
-````
 
 3. **Navigate to Project Directory:**
 
